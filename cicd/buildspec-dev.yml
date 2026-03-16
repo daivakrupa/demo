@@ -8,18 +8,20 @@ phases:
       - curl -O https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
       - unzip terraform_1.6.6_linux_amd64.zip
       - mv terraform /usr/local/bin/
+      - terraform --version
 
   pre_build:
     commands:
+      - echo "Entering terraform directory"
       - cd terraform-dev-infra
-      - terraform init
+      - terraform init -input=false
       - terraform workspace select dev || terraform workspace new dev
 
   build:
     commands:
       - terraform fmt -check
       - terraform validate
-      - terraform plan -out=tfplan
+      - terraform plan -out=tfplan -input=false
 
   post_build:
     commands:
