@@ -14,7 +14,7 @@ phases:
     commands:
       - echo "Entering terraform directory"
       - cd terraform-dev-infra
-      - terraform init -input=false
+      - terraform init -reconfigure -input=false
       - terraform workspace select dev || terraform workspace new dev
 
   build:
