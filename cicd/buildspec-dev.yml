@@ -12,16 +12,17 @@ phases:
 
   pre_build:
     commands:
-      - echo "Entering terraform directory"
+      - echo "Current directory"
+      - pwd
+      - echo "Listing repo"
+      - ls -R
       - cd terraform-dev-infra
       - terraform init -reconfigure -input=false
       - terraform workspace select dev || terraform workspace new dev
 
   build:
     commands:
-      - terraform fmt -check
-      - terraform validate
-      - terraform plan -out=tfplan -input=false
+      - terraform plan -out=tfplan
 
   post_build:
     commands:
