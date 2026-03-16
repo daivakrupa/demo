@@ -22,7 +22,8 @@ phases:
 
   build:
     commands:
-      - terraform plan
+      - terraform plan -out=tfplan
+      - ls -l
 
   post_build:
     commands:
